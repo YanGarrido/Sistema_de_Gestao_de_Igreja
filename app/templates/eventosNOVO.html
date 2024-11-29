@@ -1,0 +1,162 @@
+<!DOCTYPE html>  
+<html lang="pt-br">  
+<head>  
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>Cadastro de Eventos</title>  
+    <style>  
+        :root {  
+            --primary-color: #1e90ff; /* Azul */  
+            --secondary-color: #0056b3; /* Azul escuro */  
+            --background-color: #f4f7f9; /* Cinza claro */  
+            --text-color: #333; /* Cor do texto */  
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra */  
+        }  
+
+        body {  
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;  
+            display: flex;  
+            justify-content: center;  
+            align-items: center;  
+            height: 100vh;  
+            margin: 0;  
+            background-color: var(--background-color); background-color: #100549;
+        }  
+
+        .container {  
+            background: white;  
+            padding: 20px;  
+            border-radius: 8px;  
+            box-shadow: var(--shadow);  
+            width: 400px;  
+        }  
+
+        .container h2 {  
+            text-align: center;  
+            margin-bottom: 20px;  
+            color: var(--primary-color);  
+        }  
+
+        .container form {  
+            display: flex;  
+            flex-direction: column;  
+        }  
+
+        .container label {  
+            font-weight: bold;  
+            margin-bottom: 5px;  
+        }  
+
+        .container input,  
+        .container select,  
+        .container textarea {  
+            padding: 10px;  
+            margin-bottom: 15px;  
+            border: 1px solid #ccc;  
+            border-radius: 4px;  
+            font-size: 1rem;  
+        }  
+
+        .container button {  
+            padding: 10px;  
+            background-color: var(--primary-color);  
+            color: white;  
+            border: none;  
+            border-radius: 4px;  
+            cursor: pointer;  
+            font-size: 1rem;  
+            transition: background-color 0.3s ease;  
+        }  
+
+        .container button:hover {  
+            background-color: var(--secondary-color);  
+        }  
+    </style>  
+</head>  
+<body>  
+    <div class="container" id="eventosContainer">  
+        <h2>Cadastro de Eventos</h2>  
+        <form method="POST" action="/eventos/cadastro">
+            <label for="nomeEvento">Nome do Evento</label>
+            <input type="text" id="nomeEvento" name="nome" required>
+        
+            <label for="descricaoEvento">Descrição</label>
+            <textarea id="descricaoEvento" name="descricao" rows="4" required></textarea>
+        
+            <label for="dataInicio">Data de Início</label>
+            <input type="datetime-local" id="dataInicio" name="data_inicio" required>
+        
+            <label for="dataFim">Data de Fim</label>
+            <input type="datetime-local" id="dataFim" name="data_fim">
+
+            <label for="numero_participantes">Vagas</label>
+            <input type="int" id="numero_participantes" name="numero_participantes">
+        
+            <label for="localEvento">Local</label>
+            <select name="id_local" id="localEvento" required>
+                <option value="">Selecione um local</option>
+                <option value="1">Igreja Central</option>
+                <option value="2">Igreja Filial</option>
+                <option value="3">Auditório</option>
+            </select>
+        
+            <label for="tipoEvento">Tipo de Evento</label>
+            <select name="tipo" id="tipoEvento" required>
+                <option value="">Selecione um tipo</option>
+                <option value="1">Cantata</option>
+                <option value="2">Passeio</option>
+                <option value="3">Visita</option>
+                <option value="4">Outro</option>
+            </select>
+        
+            <button type="submit">Cadastrar Evento</button>
+        </form>  
+    </div>  
+
+    <script>  
+        /*
+        // Array de opções de locais  
+        const locais = [  
+            { id: 1, nome: 'Igreja Central' },  
+            { id: 2, nome: 'Igreja Filial' },  
+            { id: 3, nome: 'Auditório' },  
+            // Adicione mais opções de locais conforme necessário  
+        ];
+
+        // Array de opções de tipos de eventos  
+        const tiposEventos = [  
+            { id: 1, nome: 'Culto de Adoração' },  
+            { id: 2, nome: 'Seminário de Liderança' },  
+            { id: 3, nome: 'Palestra sobre Família' },  
+            // Adicione mais opções de tipos de eventos conforme necessário  
+        ];
+        */
+
+        // Função para popular as opções de local  
+        function populateLocais() {  
+            const localSelect = document.getElementById('localEvento');  
+            locais.forEach(local => {  
+                const option = document.createElement('option');  
+                option.value = local.id;  
+                option.text = local.nome;  
+                localSelect.add(option);  
+            });  
+        }  
+
+        // Função para popular as opções de tipo de evento  
+        function populateTiposEventos() {  
+            const tipoEventoSelect = document.getElementById('tipoEvento');  
+            tiposEventos.forEach(tipo => {  
+                const option = document.createElement('option');  
+                option.value = tipo.id;  
+                option.text = tipo.nome;  
+                tipoEventoSelect.add(option);  
+            });  
+        }  
+
+        // Chamar as funções para popular as opções  
+        populateLocais();  
+        populateTiposEventos();  
+    </script>  
+</body>  
+</html>

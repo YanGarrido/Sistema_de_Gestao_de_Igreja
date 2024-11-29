@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema da Igreja - Reuniões</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #1e90ff;
+            --secondary-color: #0056b3;
+            --background-color: #f4f7f9;
+            --text-color: #333;
+            --shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        a {
+            text-decoration: none;
+        }
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+
+        /* Navigation Styles */
+        .nav-container {
+            background: white;
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--primary-color);
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            background-color: var(--primary-color);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Card Grid Styles */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .card-icon {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        .table-responsive {
+            overflow-x: auto;
+            margin: 2rem 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            box-shadow: var(--shadow);
+        }
+
+        th,
+        td {
+            padding: 1rem;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+            margin: 0 15px;
+            /* Margem para espaçamento */
+        }
+
+        .btn:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 10% auto;
+            padding: 2rem;
+            border-radius: 8px;
+            max-width: 500px;
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Sistema de Gestão da Igreja</h1>
+    </header>
+
+    <nav class="nav-container">
+        <div class="nav-links">
+            <a href="/"><i class="fas fa-home"></i> Início</a>
+            <a href="/ministerio"><i class="fas fa-church"></i> Ministérios</a>
+            <a href="/reunioes"><i class="fas fa-users"></i> Reuniões</a>
+            <a href="/eventos"><i class="fas fa-calendar-alt"></i> Eventos</a>
+        </div>
+    </nav>
+
+    <div class="card-grid">
+        <!-- Reuniões -->
+        <div class="card" id="reunioes">
+            <div class="card-header">
+                <i class="fas fa-users card-icon"></i>
+                <h2>Reuniões</h2>
+                <a class="btn" href="/reunioes/cadastro">Criar Reuniao</a>
+            </div>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Reunião</th>
+                            <th>Data</th>
+                            <th>Local</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for reuniao in reunioes %}
+                        <tr>
+                            <td>{{ reuniao.nome }}</td>
+                            <td>{{ reuniao.data_inicio }}</td>
+                            <td>{{ reuniao.local.nome }}</td>
+                            <td>
+                            <button class="btn" onclick="showDetails('Reunião de Oração')">Ver Detalhes</button>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal" id="detailsModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Detalhes</h2>
+            <div id="modalContent"></div>
+        </div>
+    </div>
+
+    <script>
+        // Modal Functions  
+        function showDetails(id) {
+            const modal = document.getElementById('detailsModal');
+            const modalContent = document.getElementById('modalContent');
+
+            modalContent.innerHTML = `  
+                <h3>${id.charAt(0).toUpperCase() + id.slice(1)} Detalhes</h3>  
+                <p>Aqui estão os detalhes sobre a reunião de ${id}...</p>  
+            `;
+
+            modal.style.display = 'block';
+        }
+
+        function participarReuniao(id) {
+            // Lógica para participar da reunião selecionada  
+            console.log(`Participando da reunião: ${id}`);
+        }
+
+        function showCreateModal() {
+            document.getElementById('createModal').style.display = 'block';
+        }
+
+        function hideCreateModal() {
+            document.getElementById('createModal').style.display = 'none';
+        }
+
+        // Fechar Modal  
+        document.querySelectorAll('.close-modal').forEach(function (closeBtn) {
+            closeBtn.addEventListener('click', function () {
+                document.getElementById('detailsModal').style.display = 'none';
+            });
+        });
+
+        // Fechar Modal ao clicar fora  
+        window.onclick = function (event) {
+            const detailsModal = document.getElementById('detailsModal');
+            const createModal = document.getElementById('createModal');
+
+            if (event.target == detailsModal) {
+                detailsModal.style.display = 'none';
+            } else if (event.target == createModal) {
+                createModal.style.display = 'none';
+            }
+        }  
+    </script>
+</body>
+
+</html>
