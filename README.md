@@ -29,24 +29,34 @@ O sistema oferece funcionalidades para:
 
 ## 📁 Estrutura do Projeto
 
-Sistema_de_Gestao_de_Igreja/ ├── app/ # Diretório principal da aplicação ├── Gatilhos.sql # Scripts de gatilhos para o banco de dados ├── PESQUISAPORNOME.sql # Script para pesquisa por nome ├── PROCEDURE.sql # Procedimentos armazenados ├── ScriptProjetoDB.sql # Script principal do banco de dados ├── pesquisas.sql # Scripts de consultas específicas ├── requirements.txt # Dependências do projeto ├── .gitignore # Arquivos e pastas a serem ignorados pelo Git └── README.md # Documentação do projeto
-
+```text
+Sistema_de_Gestao_de_Igreja/
+├── app/                   # Diretório principal da aplicação
+├── Gatilhos.sql           # Scripts de gatilhos para o banco de dados
+├── PESQUISAPORNOME.sql    # Script para pesquisa por nome
+├── PROCEDURE.sql          # Procedimentos armazenados
+├── ScriptProjetoDB.sql    # Script principal do banco de dados
+├── pesquisas.sql          # Scripts de consultas específicas
+├── requirements.txt       # Dependências do projeto
+├── .gitignore             # Arquivos e pastas a serem ignorados pelo Git
+└── README.md              # Documentação do projeto
+```
 ---
 
 ## 🚀 Como Executar o Projeto
 
 1. Clone o repositório:
-  
+```bash
    git clone https://github.com/YanGarrido/Sistema_de_Gestao_de_Igreja.git
-
+````
 2. Navegue até o diretório do projeto:
-
+```bash
   cd Sistema_de_Gestao_de_Igreja
-
+````
 4. Instale as dependências:
-
+```bash
   pip install -r requirements.txt
-
+````
 4. Configure o banco de dados utilizando os scripts SQL fornecidos.
 
 5. Inicie a aplicação conforme as instruções específicas do projeto.
